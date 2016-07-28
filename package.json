@@ -9,6 +9,9 @@
     "tsc:w": "tsc -w",
     "typings": "typings"
   },
+  "engines": {
+    "node": "6.2.2"
+  },
   "license": "ISC",
   "dependencies": {
     "@angular/common": "2.0.0-rc.4",
