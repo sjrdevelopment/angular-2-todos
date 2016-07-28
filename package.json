@@ -1,15 +1,14 @@
 {
   "name": "simple-todo",
-  "version": "1.0.1",
+  "version": "1.0.0",
   "scripts": {
-    "start": "tsc && concurrently \"npm run tsc:w\" \"npm run lite\" --verbose",
+    "start": "tsc && concurrently \"npm run tsc:w\" \"npm run lite\" ",
     "lite": "lite-server",
-    "preinstall": "npm install -g typings && npm install -g c && oncurrentlynpm run typings install",
+    "postinstall": "npm install typings && npm run typings install",
     "tsc": "tsc",
     "tsc:w": "tsc -w",
     "typings": "typings"
   },
-  
   "engines": {
     "node": "6.2.2"
   },
