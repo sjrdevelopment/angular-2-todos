@@ -21,39 +21,44 @@ System.register(['@angular/core', '../../services/todo/todo.service'], function(
                 todo_service_1 = todo_service_1_1;
             }],
         execute: function() {
-            let TodosComponent = class TodosComponent {
-                constructor(todoService) {
+            TodosComponent = (function () {
+                function TodosComponent(todoService) {
+                    this.todoService = todoService;
                     this.title = 'Here are some todos';
                     this.todos = todoService.getTodos();
                 }
-                onInputChange(event) {
+                TodosComponent.prototype.onItemSelected = function (event) {
                     console.log('selected');
-                    console.log(event);
-                }
-            };
-            __decorate([
-                core_1.Input(), 
-                __metadata('design:type', String)
-            ], TodosComponent.prototype, "thisIsPassed", void 0);
-            TodosComponent = __decorate([
-                core_1.Component({
-                    selector: 'todos',
-                    template: `
-		<h2>Todos</h2>
-		{{title}}
-		{{thisIsPassed}}
-		<ul>
-			<li *ngFor="#todo of todos">
-				<span>{{ todo.title }}</span>
-				<input type="checkbox" checked="{{todo.completed ? 'checked' : ''}}" (change)="onInputChange($event)"/>
-			</li>
-		</ul>
-
-	`,
-                    providers: [todo_service_1.TodoService]
-                }), 
-                __metadata('design:paramtypes', [todo_service_1.TodoService])
-            ], TodosComponent);
+                    var todoId = event.target.dataset.indexid;
+                    var toggleComplete = this.todoService.toggleTodoComplete(todoId);
+                    if (toggleComplete === 'all_complete') {
+                        alert('all complete');
+                    }
+                };
+                TodosComponent.prototype.onNewTodoSubmit = function (event) {
+                    event.preventDefault();
+                    event.target.reset();
+                    console.log('form submit');
+                    this.todoService.addTodo(this.newTodoName);
+                };
+                TodosComponent.prototype.onNewTodoInputChange = function (event) {
+                    console.log('text added');
+                    this.newTodoName = event.target.value;
+                };
+                __decorate([
+                    core_1.Input(), 
+                    __metadata('design:type', String)
+                ], TodosComponent.prototype, "thisIsPassed", void 0);
+                TodosComponent = __decorate([
+                    core_1.Component({
+                        selector: 'todos',
+                        template: "\n\t\t<h2>Todos</h2>\n\t\t{{title}}\n\t\t{{thisIsPassed}}\n\t\t<ul>\n\t\t\t<li *ngFor=\"#todo of todos; let i = index\" class=\"{{todo.completed ? 'checked' : ''}}\">\n\t\t\t\t<span>{{ todo.title }}</span>\n\t\t\t\t<input [attr.data-indexId]=\"i\" type=\"checkbox\" checked=\"{{todo.completed ? 'checked' : ''}}\" (change)=\"onItemSelected($event)\"/>\n\t\t\t</li>\n\t\t</ul>\n\t\t<form (submit)=\"onNewTodoSubmit($event)\">\n\t\t\t<input type=\"text\" (change)=\"onNewTodoInputChange($event)\" placeholder=\"I need to...\" />\n\t\t</form>\n\t",
+                        providers: [todo_service_1.TodoService]
+                    }), 
+                    __metadata('design:paramtypes', [todo_service_1.TodoService])
+                ], TodosComponent);
+                return TodosComponent;
+            }());
             exports_1("TodosComponent", TodosComponent);
         }
     }

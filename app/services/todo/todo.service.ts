@@ -1,18 +1,39 @@
-export class TodoService {
-	getTodos() {
-		return [
-			{
-				title: "Item 1",
-				completed: true			},
-			{
-				title: "Item 2",
-				completed: false
-			},
-			{
-				title: "Item 3",
-				completed: false
-			}
-		]
+import {find} from 'lodash'
 
+export class TodoService {
+	todos = [
+		{
+			title: "Pick up dry cleaning",
+			completed: true
+		},
+		{
+			title: "Buy groceries",
+			completed: false
+		},
+		{
+			title: "Book train tickets",
+			completed: false
+		}
+	];
+
+	getTodos() {
+		return this.todos
+	}
+
+	addTodo(newTodoName) {
+		console.log('add new todo')
+		console.log(newTodoName)
+		this.todos.push({
+			title: newTodoName,
+			completed: false
+		})
+	}
+
+	toggleTodoComplete(todoId) {
+		this.todos[todoId].completed = !this.todos[todoId].completed
+
+		if (!find(this.todos, {completed: false})) {
+			return 'all_complete'
+		}
 	}
 }

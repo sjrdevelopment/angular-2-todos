@@ -1,27 +1,50 @@
-System.register([], function(exports_1, context_1) {
+System.register(['lodash'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
+    var lodash_1;
     var TodoService;
     return {
-        setters:[],
+        setters:[
+            function (lodash_1_1) {
+                lodash_1 = lodash_1_1;
+            }],
         execute: function() {
-            class TodoService {
-                getTodos() {
-                    return [
+            TodoService = (function () {
+                function TodoService() {
+                    this.todos = [
                         {
-                            title: "Item 1",
-                            completed: true },
+                            title: "Pick up dry cleaning",
+                            completed: true
+                        },
                         {
-                            title: "Item 2",
+                            title: "Buy groceries",
                             completed: false
                         },
                         {
-                            title: "Item 3",
+                            title: "Book train tickets",
                             completed: false
                         }
                     ];
                 }
-            }
+                TodoService.prototype.getTodos = function () {
+                    return this.todos;
+                };
+                TodoService.prototype.addTodo = function (newTodoName) {
+                    console.log('add new todo');
+                    console.log(newTodoName);
+                    this.todos.push({
+                        title: newTodoName,
+                        completed: false
+                    });
+                };
+                TodoService.prototype.toggleTodoComplete = function (todoId) {
+                    this.todos[todoId].completed = !this.todos[todoId].completed;
+                    if (!lodash_1.find(this.todos, { completed: false })) {
+                        return 'all_complete';
+                    }
+                };
+                return TodoService;
+            }());
             exports_1("TodoService", TodoService);
         }
     }

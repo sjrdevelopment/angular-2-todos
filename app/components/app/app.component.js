@@ -21,22 +21,20 @@ System.register(['@angular/core', '../todos/todos.component'], function(exports_
                 todos_component_1 = todos_component_1_1;
             }],
         execute: function() {
-            let AppComponent = class AppComponent {
-                constructor() {
+            AppComponent = (function () {
+                function AppComponent() {
                     this.passedVar = 'Hi from parent';
                 }
-            };
-            AppComponent = __decorate([
-                core_1.Component({
-                    selector: 'my-app',
-                    template: `
-    	<h1>Hello Angular Todos</h1>
-    	<todos [thisIsPassed]="passedVar"></todos>
-    `,
-                    directives: [todos_component_1.TodosComponent]
-                }), 
-                __metadata('design:paramtypes', [])
-            ], AppComponent);
+                AppComponent = __decorate([
+                    core_1.Component({
+                        selector: 'my-app',
+                        template: "\n    \t<h1>Hello Angular Todos</h1>\n    \t<todos [thisIsPassed]=\"passedVar\"></todos>\n    ",
+                        directives: [todos_component_1.TodosComponent]
+                    }), 
+                    __metadata('design:paramtypes', [])
+                ], AppComponent);
+                return AppComponent;
+            }());
             exports_1("AppComponent", AppComponent);
         }
     }
