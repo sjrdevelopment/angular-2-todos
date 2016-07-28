@@ -9,6 +9,7 @@
     "tsc:w": "tsc -w",
     "typings": "typings"
   },
+  
   "engines": {
     "node": "6.2.2"
   },
