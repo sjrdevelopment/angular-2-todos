@@ -4,19 +4,20 @@ import {TodoService} from '../../services/todo/todo.service'
 @Component ({
 	selector: 'todos',
 	template: `
-		<h2>Todos</h2>
 		{{title}}
 		{{thisIsPassed}}
-		<ul>
-			<li *ngFor="#todo of todos; let i = index" class="{{todo.completed ? 'checked' : ''}}">
-				<span>{{ todo.title }}</span>
-				<input [attr.data-indexId]="i" type="checkbox" checked="{{todo.completed ? 'checked' : ''}}" (change)="onItemSelected($event)"/>
-				<button class="close-button" type="button" (click)="onItemRemove(i)">x</button>
-			</li>
-		</ul>
-		<form (submit)="onNewTodoSubmit($event)">
-			<input type="text" (change)="onNewTodoInputChange($event)" placeholder="I need to..." />
-		</form>
+		<div class="list-area">
+			<ul class="todo-list">
+				<li *ngFor="#todo of todos; let i = index" class="todo-item {{todo.completed ? 'checked' : ''}}">
+					<span>{{ todo.title }}</span>
+					<input [attr.data-indexId]="i" type="checkbox" checked="{{todo.completed ? 'checked' : ''}}" (change)="onItemSelected($event)"/>
+					<button class="close-button" type="button" (click)="onItemRemove(i)">x</button>
+				</li>
+			</ul>
+			<form (submit)="onNewTodoSubmit($event)">
+				<input type="text" (change)="onNewTodoInputChange($event)" placeholder="I need to..." class="new-item-input" />
+			</form>
+		</div>
 	`,
 	providers: [TodoService]
 })

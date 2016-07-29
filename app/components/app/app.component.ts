@@ -4,8 +4,10 @@ import {TodosComponent} from '../todos/todos.component';
 @Component({
     selector: 'my-app',
     template: `
-    	<h1>Hello Angular Todos</h1>
-    	<todos [thisIsPassed]="passedVar"></todos>
+    	<div class="main">
+    		<h1 class="heading">Hello Angular Todos</h1>
+    		<todos [thisIsPassed]="passedVar"></todos>
+    	</div>
     `,
     directives: [TodosComponent]
 })

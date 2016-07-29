@@ -28,7 +28,7 @@ System.register(['@angular/core', '../todos/todos.component'], function(exports_
                 AppComponent = __decorate([
                     core_1.Component({
                         selector: 'my-app',
-                        template: "\n    \t<h1>Hello Angular Todos</h1>\n    \t<todos [thisIsPassed]=\"passedVar\"></todos>\n    ",
+                        template: "\n    \t<div class=\"main\">\n    \t\t<h1 class=\"heading\">Hello Angular Todos</h1>\n    \t\t<todos [thisIsPassed]=\"passedVar\"></todos>\n    \t</div>\n    ",
                         directives: [todos_component_1.TodosComponent]
                     }), 
                     __metadata('design:paramtypes', [])
