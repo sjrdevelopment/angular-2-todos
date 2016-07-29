@@ -11,6 +11,7 @@ import {TodoService} from '../../services/todo/todo.service'
 			<li *ngFor="#todo of todos; let i = index" class="{{todo.completed ? 'checked' : ''}}">
 				<span>{{ todo.title }}</span>
 				<input [attr.data-indexId]="i" type="checkbox" checked="{{todo.completed ? 'checked' : ''}}" (change)="onItemSelected($event)"/>
+				<button class="close-button" type="button" (click)="onItemRemove(i)">x</button>
 			</li>
 		</ul>
 		<form (submit)="onNewTodoSubmit($event)">
@@ -27,6 +28,10 @@ export class TodosComponent {
 	title ='Here are some todos'
 	todos
 	newTodoName
+
+	onItemRemove(itemIndexId) {
+		this.todoService.removeTodo(itemIndexId)
+	}
 
 	onItemSelected(event) {
 		console.log('selected')

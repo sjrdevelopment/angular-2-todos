@@ -37,6 +37,9 @@ System.register(['lodash'], function(exports_1, context_1) {
                         completed: false
                     });
                 };
+                TodoService.prototype.removeTodo = function (todoId) {
+                    this.todos.splice(todoId, 1);
+                };
                 TodoService.prototype.toggleTodoComplete = function (todoId) {
                     this.todos[todoId].completed = !this.todos[todoId].completed;
                     if (!lodash_1.find(this.todos, { completed: false })) {

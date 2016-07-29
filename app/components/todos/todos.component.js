@@ -27,6 +27,9 @@ System.register(['@angular/core', '../../services/todo/todo.service'], function(
                     this.title = 'Here are some todos';
                     this.todos = todoService.getTodos();
                 }
+                TodosComponent.prototype.onItemRemove = function (itemIndexId) {
+                    this.todoService.removeTodo(itemIndexId);
+                };
                 TodosComponent.prototype.onItemSelected = function (event) {
                     console.log('selected');
                     var todoId = event.target.dataset.indexid;
@@ -52,7 +55,7 @@ System.register(['@angular/core', '../../services/todo/todo.service'], function(
                 TodosComponent = __decorate([
                     core_1.Component({
                         selector: 'todos',
-                        template: "\n\t\t<h2>Todos</h2>\n\t\t{{title}}\n\t\t{{thisIsPassed}}\n\t\t<ul>\n\t\t\t<li *ngFor=\"#todo of todos; let i = index\" class=\"{{todo.completed ? 'checked' : ''}}\">\n\t\t\t\t<span>{{ todo.title }}</span>\n\t\t\t\t<input [attr.data-indexId]=\"i\" type=\"checkbox\" checked=\"{{todo.completed ? 'checked' : ''}}\" (change)=\"onItemSelected($event)\"/>\n\t\t\t</li>\n\t\t</ul>\n\t\t<form (submit)=\"onNewTodoSubmit($event)\">\n\t\t\t<input type=\"text\" (change)=\"onNewTodoInputChange($event)\" placeholder=\"I need to...\" />\n\t\t</form>\n\t",
+                        template: "\n\t\t<h2>Todos</h2>\n\t\t{{title}}\n\t\t{{thisIsPassed}}\n\t\t<ul>\n\t\t\t<li *ngFor=\"#todo of todos; let i = index\" class=\"{{todo.completed ? 'checked' : ''}}\">\n\t\t\t\t<span>{{ todo.title }}</span>\n\t\t\t\t<input [attr.data-indexId]=\"i\" type=\"checkbox\" checked=\"{{todo.completed ? 'checked' : ''}}\" (change)=\"onItemSelected($event)\"/>\n\t\t\t\t<button class=\"close-button\" type=\"button\" (click)=\"onItemRemove(i)\">x</button>\n\t\t\t</li>\n\t\t</ul>\n\t\t<form (submit)=\"onNewTodoSubmit($event)\">\n\t\t\t<input type=\"text\" (change)=\"onNewTodoInputChange($event)\" placeholder=\"I need to...\" />\n\t\t</form>\n\t",
                         providers: [todo_service_1.TodoService]
                     }), 
                     __metadata('design:paramtypes', [todo_service_1.TodoService])

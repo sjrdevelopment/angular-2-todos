@@ -23,10 +23,15 @@ export class TodoService {
 	addTodo(newTodoName) {
 		console.log('add new todo')
 		console.log(newTodoName)
+
 		this.todos.push({
 			title: newTodoName,
 			completed: false
 		})
+	}
+
+	removeTodo(todoId) {
+		this.todos.splice(todoId, 1)
 	}
 
 	toggleTodoComplete(todoId) {
