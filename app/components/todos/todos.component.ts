@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core'
+import {Component, Input, ViewChild} from '@angular/core'
 import {TodoService} from '../../services/todo/todo.service'
 
 @Component ({
@@ -15,7 +15,7 @@ import {TodoService} from '../../services/todo/todo.service'
 				</li>
 			</ul>
 			<form (submit)="onNewTodoSubmit($event)">
-				<input type="text" (change)="onNewTodoInputChange($event)" placeholder="I need to..." class="new-item-input" />
+				<input #name type="text" (change)="onNewTodoInputChange($event)" placeholder="I need to..." class="new-item-input" />
 			</form>
 		</div>
 	`,
@@ -29,6 +29,8 @@ export class TodosComponent {
 	title ='Here are some todos'
 	todos
 	newTodoName
+
+	@ViewChild('name') vc;
 
 	onItemRemove(itemIndexId) {
 		this.todoService.removeTodo(itemIndexId)
@@ -59,6 +61,11 @@ export class TodosComponent {
 		console.log('text added')
 
 		this.newTodoName = event.target.value
+	}
+
+	ngAfterViewInit() {
+		console.log('view init')
+		this.vc.nativeElement.focus();
 	}
 
 	constructor(private todoService: TodoService) {

@@ -48,14 +48,22 @@ System.register(['@angular/core', '../../services/todo/todo.service'], function(
                     console.log('text added');
                     this.newTodoName = event.target.value;
                 };
+                TodosComponent.prototype.ngAfterViewInit = function () {
+                    console.log('view init');
+                    this.vc.nativeElement.focus();
+                };
                 __decorate([
                     core_1.Input(), 
                     __metadata('design:type', String)
                 ], TodosComponent.prototype, "thisIsPassed", void 0);
+                __decorate([
+                    core_1.ViewChild('name'), 
+                    __metadata('design:type', Object)
+                ], TodosComponent.prototype, "vc", void 0);
                 TodosComponent = __decorate([
                     core_1.Component({
                         selector: 'todos',
-                        template: "\n\t\t{{title}}\n\t\t{{thisIsPassed}}\n\t\t<div class=\"list-area\">\n\t\t\t<ul class=\"todo-list\">\n\t\t\t\t<li *ngFor=\"#todo of todos; let i = index\" class=\"todo-item {{todo.completed ? 'checked' : ''}}\">\n\t\t\t\t\t<span>{{ todo.title }}</span>\n\t\t\t\t\t<input [attr.data-indexId]=\"i\" type=\"checkbox\" checked=\"{{todo.completed ? 'checked' : ''}}\" (change)=\"onItemSelected($event)\"/>\n\t\t\t\t\t<button class=\"close-button\" type=\"button\" (click)=\"onItemRemove(i)\">x</button>\n\t\t\t\t</li>\n\t\t\t</ul>\n\t\t\t<form (submit)=\"onNewTodoSubmit($event)\">\n\t\t\t\t<input type=\"text\" (change)=\"onNewTodoInputChange($event)\" placeholder=\"I need to...\" class=\"new-item-input\" />\n\t\t\t</form>\n\t\t</div>\n\t",
+                        template: "\n\t\t{{title}}\n\t\t{{thisIsPassed}}\n\t\t<div class=\"list-area\">\n\t\t\t<ul class=\"todo-list\">\n\t\t\t\t<li *ngFor=\"#todo of todos; let i = index\" class=\"todo-item {{todo.completed ? 'checked' : ''}}\">\n\t\t\t\t\t<span>{{ todo.title }}</span>\n\t\t\t\t\t<input [attr.data-indexId]=\"i\" type=\"checkbox\" checked=\"{{todo.completed ? 'checked' : ''}}\" (change)=\"onItemSelected($event)\"/>\n\t\t\t\t\t<button class=\"close-button\" type=\"button\" (click)=\"onItemRemove(i)\">x</button>\n\t\t\t\t</li>\n\t\t\t</ul>\n\t\t\t<form (submit)=\"onNewTodoSubmit($event)\">\n\t\t\t\t<input #name type=\"text\" (change)=\"onNewTodoInputChange($event)\" placeholder=\"I need to...\" class=\"new-item-input\" />\n\t\t\t</form>\n\t\t</div>\n\t",
                         providers: [todo_service_1.TodoService]
                     }), 
                     __metadata('design:paramtypes', [todo_service_1.TodoService])
